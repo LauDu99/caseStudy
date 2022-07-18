@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Add Employee</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Love+Ya+Like+A+Sister&family=Open+Sans:wght@300&display=swap"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/6c04b5c22c.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+</script>
+<style type="text/css">
+h1 {
+	color: black;
+	text-align: left;
+	font-size: 25px;
+	font-family: 'Josefin Sans', sans-serif;
+	padding: 25px;
+}
+
+.recuadro {
+	border-color: black;
+	border-style: solid;
+	border-width: 2.5px;
+	height: 150%;
+	width: 100%;
+	display: block;
+	padding: 3px;
+}
+
+.datos {
+	width: 800px;
+	height: 400px;
+	margin-left: 15%;
+	text-align: center;
+}
+
+.input {
+	width: 300px;
+	margin: 10px;
+}
+
+.button {
+	background-color: #6CB0CD;
+	margin-left: 60%;
+	margin-right: 30%;
+	margin-top: 30px;
+	width: 80px;
+}
+
+.navbar {
+	background-color: black;
+	padding: 10px;
+}
+.navbar-item {
+	color: white;
+}
+.color {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="/homePage" style="font-size: 20px">
+					Employment System<i class="fa-solid fa-book-open-reader"></i>
+				</a> <a role="button" class="navbar-burger" aria-label="menu"
+					aria-expanded="false" data-target="navbarBasicExample"> <span
+					aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+					aria-hidden="true"></span>
+				</a>
+			</div>
+		</nav>
+		<div class="recuadro justify-content-center">
+		<h1>Employee registration</h1>
+			<form th:action="@{/Employees}" th:object="${Employee}" method="POST">
+				<div class="datos">
+					<label for="Name"><b>Name*</b></label><br> <input
+						class="input form-control" type="text" th:field="*{firstName}"
+						placeholder="Name"
+						th:classappend="${#fields.hasErrors('firstName')} ? 'input is-danger' : ''">
+					<br>
+					<div class="invalid-feedback color" th:errors="*{firstName}"></div>
+
+					<label for="middleName"><b>Middle Name</b></label><br> <input
+						class="input form-control" type="text" th:field="*{middleName}"
+						placeholder="Middle Name"
+						th:classappend="${#fields.hasErrors('middleName')} ? 'input is-danger' : ''"><br>
+					<div class="invalid-feedback color" th:errors="*{middleName}"></div>
+
+					<label for="lastName"><b>Last Name*</b></label><br> <input
+						class="input form-control" type="text" th:field="*{lastName}"
+						placeholder="Last Name"
+						th:classappend="${#fields.hasErrors('lastName')} ? 'input is-danger' : ''">
+					<br>
+					<div class="invalid-feedback color" th:errors="*{lastName}"></div>
+
+					<label for="birthDay"><b>BirthDate*</b></label><br> <input
+						class="input form-control" type="date" th:field="*{birthDate}"
+						placeholder="BirthDate"
+						th:classappend="${#fields.hasErrors('birthDate')} ? 'input is-danger' : ''">
+					<br>
+					<div class="invalid-feedback color" th:errors="*{birthDate}"></div>
+
+
+					<label for="Position"><b>Position*</b></label><br> <input
+						class="input form-control" type="text" th:field="*{position}"
+						placeholder="Position"
+						th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''">
+					<div class="invalid-feedback color" th:errors="*{position}"></div>
+				</div>
+				<button class="button" type="submit">Submit</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Compensations</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Love+Ya+Like+A+Sister&family=Open+Sans:wght@300&display=swap"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/6c04b5c22c.js"
+	crossorigin="anonymous"></script>
+<style type="text/css">
+h1 {
+	color: black;
+	text-align: left;
+	font-size: 25px;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.header {
+	width: 100%;
+	padding: 25px;
+}
+
+.navbar {
+	background-color: black;
+	padding: 10px;
+}
+
+.navbar-item {
+	color: white;
+}
+
+.block {
+	margin-left: 90px;
+	margin-right: 90px;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="/homePage" style="font-size: 20px">
+					Employment System<i class="fa-solid fa-book-open-reader"></i>
+				</a> <a role="button" class="navbar-burger" aria-label="menu"
+					aria-expanded="false" data-target="navbarBasicExample"> <span
+					aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+					aria-hidden="true"></span>
+				</a>
+			</div>
+			<div id="navbarBasicExample" class="navbar-menu">
+				<div class="navbar-start">
+					<a class="navbar-item" href="/addEmployee">Create Employee<i
+						class="fa-light fa-plus"></i></a>
+				</div>
+			</div>
+		</nav>
+		<div class="header">
+			<h1>Employees Compensations</h1>
+		</div>
+
+		<div class="level-item">
+			<form class="" th:action="@{/findCompensations}">
+				<div class="field has-addons">
+					<p class="control">
+						<input class="input form-control" type="text" name="keyWord"
+							id="keyWord" th:value="${keyWord}" placeholder="Find an employee">
+					</p>
+					<button class="button is-outlined" value="Clean"
+						onclick="cleanFields()">
+						<span class="icon is-small"> <i class="fas fa-times"></i>
+						</span>
+					</button>
+					<p class="control">
+						<input class="button is-info is-outlined" type="submit"
+							value="Search">
+					</p>
+				</div>
+			</form>
+		</div>
+
+		<div class="block">
+			<table class="table table is-hoverable table is-fullwidth">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Last Name</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="employee : ${employeeList}">
+						<td th:text="${employee.id}"></td>
+						<td th:text="${employee.firstName}"></td>
+						<td th:text="${employee.lastName}"></td>
+						<td><a class="button is-primary"
+							th:href="@{'/employee/edit/' + ${employee.id}}">Edit compensations</a> 
+							<a class="button is-info"
+							th:href="@{'/historyEmployee/compensations/' + ${employee.id}}">History</a> 
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript">
+	 document.getElementById("keyWord").value = "";
+	</script>
+</body>
+</html>

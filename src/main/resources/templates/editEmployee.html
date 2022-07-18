@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Edit Employee</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Love+Ya+Like+A+Sister&family=Open+Sans:wght@300&display=swap"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/6c04b5c22c.js"
+	crossorigin="anonymous"></script>
+<style type="text/css">
+h1 {
+	color: black;
+	text-align: left;
+	font-size: 25px;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.header {
+	width: 100%;
+	height: 100px;
+	padding: 25px;
+}
+
+.navbar {
+	background-color: black;
+	padding: 10px;
+}
+
+.navbar-item {
+	color: white;
+}
+
+.input {
+	margin: 10px;
+}
+
+.button {
+	margin-left: 60%;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="/homePage" style="font-size: 20px">
+					Employment System<i class="fa-solid fa-book-open-reader"></i>
+				</a> <a role="button" class="navbar-burger" aria-label="menu"
+					aria-expanded="false" data-target="navbarBasicExample"> <span
+					aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+					aria-hidden="true"></span>
+				</a>
+			</div>
+			<div id="navbarBasicExample" class="navbar-menu">
+				<div class="navbar-start">
+					<a class="navbar-item">Create Employee<i
+						class="fa-light fa-plus"></i></a>
+				</div>
+			</div>
+		</nav>
+		<div class="header">
+			<h1>Edit Employee</h1>
+		</div>
+		<div>
+			<div class="recuadro justify-content-center">
+				<form th:action="@{'/employees/' + ${employee.id}}"
+					th:object="${employee}" method="POST">
+					<div class="datos">
+						<label for="id"><b>ID</b></label><br> <input
+							class="input form-control" type="text" th:field="*{id}"
+							readonly="readonly" disabled> <label for="Name"><b>Name*</b></label><br>
+						<input class="input form-control" type="text"
+							th:field="*{firstName}" placeholder="Name" required
+							th:classappend="${#fields.hasErrors('firstName')} ? 'input is-danger' : ''">
+						<br>
+						<div class="invalid-feedback color" th:errors="*{firstName}"></div>
+
+						<label for="middleName"><b>Middle Name</b></label><br> <input
+							class="input form-control" type="text" th:field="*{middleName}"
+							placeholder="Middle Name"
+							th:classappend="${#fields.hasErrors('middleName')} ? 'input is-danger' : ''"><br>
+						<div class="invalid-feedback color" th:errors="*{middleName}"></div>
+
+						<label for="lastName"><b>Last Name*</b></label><br> <input
+							class="input form-control" type="text" th:field="*{lastName}"
+							placeholder="Last Name" required
+							th:classappend="${#fields.hasErrors('lastName')} ? 'input is-danger' : ''">
+						<br>
+						<div class="invalid-feedback color" th:errors="*{lastName}"></div>
+
+						<label for="birthDay"><b>BirthDate*</b></label><br> <input
+							class="input form-control" type="date" th:field="*{birthDate}"
+							placeholder="BirthDate" required
+							th:classappend="${#fields.hasErrors('birthDate')} ? 'input is-danger' : ''">
+						<br>
+						<div class="invalid-feedback color" th:errors="*{birthDate}"></div>
+
+
+						<label for="Position"><b>Position*</b></label><br> <input
+							class="input form-control" type="text" th:field="*{position}"
+							placeholder="Position" required
+							th:classappend="${#fields.hasErrors('position')} ? 'is-invalid' : ''">
+						<div class="invalid-feedback color" th:errors="*{position}"></div>
+					</div>
+					<button class="button is-success" type="submit">
+						<span class="icon is-small"> <i class="fas fa-check"></i>
+						</span> <span>Save</span>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

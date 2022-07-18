@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Employee history</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Love+Ya+Like+A+Sister&family=Open+Sans:wght@300&display=swap"
+	rel="stylesheet">
+<script src="https://kit.fontawesome.com/6c04b5c22c.js"
+	crossorigin="anonymous"></script>
+<style type="text/css">
+h1 {
+	color: black;
+	text-align: left;
+	font-size: 25px;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.header {
+	width: 100%;
+	height: 100px;
+	padding: 25px;
+}
+
+.navbar {
+	background-color: black;
+	padding: 10px;
+}
+
+.navbar-item {
+	color: white;
+}
+
+.input {
+	
+	width: 200px;
+}
+
+.box {
+	width: 800px;
+	margin-left: 15%;
+}
+
+</style>
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="/homePage" style="font-size: 20px">
+					Employment System<i class="fa-solid fa-book-open-reader"></i>
+				</a> <a role="button" class="navbar-burger" aria-label="menu"
+					aria-expanded="false" data-target="navbarBasicExample"> <span
+					aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+					aria-hidden="true"></span>
+				</a>
+			</div>
+			<div id="navbarBasicExample" class="navbar-menu">
+				<div class="navbar-start">
+					<a class="navbar-item" href="/addEmployee">Create Employee<i
+						class="fa-light fa-plus"></i></a>
+				</div>
+			</div>
+		</nav>
+		<div class="header">
+			<h1>History</h1>
+			<Strong>Find by a date</Strong>
+			
+		</div>
+				
+				<div class="level-item" style="align-items: center; margin:20px;">
+			<form class="" th:action="@{'/employee/compensationsByDate/' + ${Employee.id}}" th:object="${compensationList}">
+				<div class="field has-addons">
+					<p class="control">
+					<label>Start Date</label>
+						<input class="input form-control" style="margin-right: 10px;" type="text" name="startDate"
+							id="startDate" th:value="${startDate}" placeholder="Start date">
+							<label>End Date</label>
+							<input class="input form-control" type="text" name="endDate"
+							id="endDate" th:value="${endDate}" placeholder="Start date">
+					</p>
+					<button class="button is-outlined" value="Clean"
+						onclick="cleanFields()">
+						<span class="icon is-small"> <i class="fas fa-times"></i>
+						</span>
+					</button>
+					<p class="control">
+						<input class="button is-info is-outlined" type="submit"
+							value="Search">
+					</p>
+				</div>
+			</form>
+		</div>
+		</div>
+
+		<div class="box justify-content-center" >
+			<article class="media">
+				<div class="media-left">
+					<figure class="image is-128x128">
+						<img src="https://bulma.io/images/placeholders/128x128.png"
+							alt="Image">
+					</figure>
+				</div>
+				<div class="media-content">
+					<div class="content" th:object="${compensationList}">
+						<h3 th:text="${Employee.firstName}+ ' ' + ${Employee.lastName}"></h3>
+						<table>
+							<thead>
+								<tr>
+									<th>Month</th>
+									<th>Year</th>
+									<th>Total Amount</th>
+									<th></th>
+		
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="compensation : ${compensationList}">
+									<td th:text="${#temporals.monthName(compensation.date)}"></td>
+									<td th:text="${#temporals.year(compensation.date)}"></td>
+									<td th:text="${total}"></td>
+									
+									<td><a class="button is-small" th:href="@{'/employee/breakdownCompensations/' + ${Employee.id}+ '/' + ${#temporals.month(compensation.date)}+ '/' + ${#temporals.year(compensation.date)}}">Breakdown</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</article>
+		</div>
+		<button class="button is-dark" style="float: right; margin-right:10%;">Back</button>
+</body>
+</html>
